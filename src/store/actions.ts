@@ -25,6 +25,38 @@ export const addQuiz =
     dispatch(setQuiz(quizList));
   };
 
+export const addQuestion =
+  (
+    quizId: string,
+    text: string,
+    imageUrl: string,
+    points: number
+  ): ThunkAction<void, Store, unknown, Action<string>> =>
+  (dispatch, getState) => {
+    const currentQuizList: Quiz[] = [...getState().quizList];
+    let quizIndex: number = getState().quizList.findIndex(
+      (item: Quiz) => item.id === quizId
+    );
+
+    if (quizIndex !== -1) {
+      const quiz: Quiz = currentQuizList[quizIndex];
+
+      quiz.items.push({
+        id: uuid(),
+        text,
+        imageUrl,
+        points,
+        optionType: "single",
+        correctAnswers: [],
+        options: [],
+      });
+
+      currentQuizList[quizIndex] = quiz;
+
+      dispatch(setQuiz(currentQuizList));
+    }
+  };
+
 export const setQuiz = (quizList: Quiz[]): ActionTypes => {
   return {
     type: SET_QUIZ,

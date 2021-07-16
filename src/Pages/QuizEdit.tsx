@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-//import CreateQuiz from "../components/Quiz/Create";
+import Edit from "../components/Quiz/Edit";
 
-function Home() {
+function QuizEdit() {
   //   const [openModal, setOpenModal] = useState<Boolean>(false);
 
   //   const closeModal = () => {
@@ -24,7 +24,9 @@ function Home() {
             </button>
           </header>
           <div className="card-content">
-            <div className="content">some quiz with id ....</div>
+            <div className="content">
+              <Edit />
+            </div>
           </div>
         </div>
       </div>
@@ -32,4 +34,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default QuizEdit;
