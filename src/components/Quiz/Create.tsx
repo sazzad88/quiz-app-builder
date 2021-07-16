@@ -37,10 +37,10 @@ const CreateQuiz = ({ closeModal }: { closeModal: () => void }) => {
         </header>
         <section className="modal-card-body">
           <div className="field">
-            <label className="label">Quiz Title</label>
+            <label className="label is-small">Quiz Title</label>
             <div className="control">
               <input
-                className={`input ${error ? "is-danger" : ""}`}
+                className={`input is-small ${error ? "is-danger" : ""}`}
                 value={title}
                 onChange={(e) => {
                   setTitle(e.target.value);

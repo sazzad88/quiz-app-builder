@@ -50,11 +50,11 @@ function Edit() {
                   <button className="button is-link is-small">Save</button>
                 </div>
               </div>
-              <div className="field">
+              <div className="field is-small">
                 <label className="label">Title</label>
                 <div className="control">
                   <input
-                    className="input"
+                    className="input is-small"
                     type="text"
                     value={title}
                     onChange={(e) => {
@@ -65,10 +65,10 @@ function Edit() {
                 </div>
               </div>
 
-              <div className="field">
-                <label className="label">Quiz Template</label>
+              <div className="field is-small">
+                <label className="label is-small">Quiz Template</label>
                 <div className="control">
-                  <div className="select">
+                  <div className="select is-small">
                     <select
                       value={layout}
                       onChange={(e) => {

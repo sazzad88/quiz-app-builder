@@ -60,7 +60,7 @@ const CreateQuiz = ({
             <label className="label">Quesiton text</label>
             <div className="control">
               <input
-                className={`input ${error.text ? "is-danger" : ""}`}
+                className={`input is-small ${error.text ? "is-danger" : ""}`}
                 value={text}
                 onChange={(e) => {
                   setText(e.target.value);
@@ -78,7 +78,7 @@ const CreateQuiz = ({
             <label className="label">Question Image (optional)</label>
             <div className="control">
               <input
-                className={`input`}
+                className={`input is-small`}
                 value={imageUrl}
                 onChange={(e) => {
                   setImageUrl(e.target.value);
@@ -92,7 +92,7 @@ const CreateQuiz = ({
             <label className="label">Quesiton points</label>
             <div className="control">
               <input
-                className={`input ${error.text ? "is-danger" : ""}`}
+                className={`input is-small ${error.text ? "is-danger" : ""}`}
                 value={points}
                 onChange={(e) => {
                   setPoints(e.target.value);
