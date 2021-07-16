@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { setQuiz } from "../../store/actions";
+import { addQuiz } from "../../store/actions";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { uuid } from "../../utils";
@@ -16,9 +16,9 @@ const CreateQuiz = ({ closeModal }: { closeModal: () => void }) => {
       return;
     }
     let quizId = uuid();
-    dispatch(setQuiz(title, quizId));
+    dispatch(addQuiz(title, quizId));
     setTimeout(() => {
-      history.push(`/admin/quiz/${quizId}/edit`);
+      history.push(`/dashboard/quiz/${quizId}/edit`);
     });
     closeModal();
   };
