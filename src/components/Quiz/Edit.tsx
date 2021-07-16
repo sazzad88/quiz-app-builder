@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Store, Quiz, Question } from "../../store/types";
 import { useParams } from "react-router-dom";
 import CreateQuestion from "./CreateQuestion";
+import ManageQuestion from "./ManageQuestion";
 
 function Edit() {
   const params = useParams();
@@ -13,6 +14,7 @@ function Edit() {
   const [quiz, setQuiz] = useState<Quiz>({} as Quiz);
   const [title, setTitle] = useState<string>("");
   const [layout, setLayout] = useState<string>("");
+  const [questionId, setQuestionId] = useState<string>("");
 
   useEffect(() => {
     const found = quizList.find((item: Quiz) => item.id === quizId);
@@ -28,7 +30,10 @@ function Edit() {
 
   const closeQuestion = (created: boolean) => {
     setOpenQuestion(false);
-    // do something else
+  };
+
+  const closeQuestionManagement = () => {
+    setQuestionId("");
   };
 
   return (
@@ -103,6 +108,9 @@ function Edit() {
                         <abbr title="Type">Type</abbr>
                       </th>
                       <th className="has-text-centered">
+                        <abbr title="Type">Options</abbr>
+                      </th>
+                      <th className="has-text-centered">
                         <abbr title="Points">Points</abbr>
                       </th>
                       <th className="has-text-centered"></th>
@@ -110,7 +118,7 @@ function Edit() {
                   </thead>
                   <tbody>
                     {quiz.items.map((quesiton: Question) => (
-                      <tr>
+                      <tr key={quesiton.id}>
                         <td>{quesiton.text}</td>
                         <td className="has-text-centered">
                           {quesiton.optionType === "multiple" ? (
@@ -119,13 +127,31 @@ function Edit() {
                             <span className="tag is-link">Single</span>
                           )}
                         </td>
+                        <td className="has-text-centered">
+                          {quesiton.options.length}
+                        </td>
                         <td className="has-text-centered">{quesiton.points}</td>
-                        <td className="has-text-centered">Manage</td>
+                        <td className="has-text-centered">
+                          <button
+                            className="button is-small is-success"
+                            onClick={() => setQuestionId(quesiton.id)}
+                          >
+                            Manage
+                          </button>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               )}
+
+              {questionId !== "" ? (
+                <ManageQuestion
+                  questionId={questionId}
+                  quizId={quizId}
+                  closeModal={closeQuestionManagement}
+                />
+              ) : null}
 
               {openQuestion ? (
                 <CreateQuestion quizId={quizId} closeQuestion={closeQuestion} />
