@@ -6,8 +6,13 @@ import { Provider, useSelector } from "react-redux";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from "./Pages/Home";
 import Dashboard from "./Pages/Dashboard";
-
+import QuizEdit from "./Pages/QuizEdit";
+import config from "./app_config.json";
 import store from "./store/store";
+
+store.subscribe(() => {
+  localStorage.setItem(config.storage_key, JSON.stringify(store.getState()));
+});
 
 function App() {
   return (
@@ -31,6 +36,10 @@ function App() {
               </Route>
               <Route exact path="/dashboard">
                 <Dashboard />
+              </Route>
+
+              <Route exact path="/dashboard/quiz/:quizId/edit">
+                <QuizEdit />
               </Route>
             </Switch>
           </Router>

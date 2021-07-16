@@ -1,11 +1,7 @@
 import { createStore } from "redux";
 
-//import { cleanThisUser } from "../utility";
-
 import { ActionTypes, SET_QUIZ } from "./actions";
 import { Quiz, Store } from "./types";
-
-// Standard interface and functions
 
 let quizList: Quiz[] = [];
 
@@ -26,9 +22,5 @@ function appReducer(state: Store = baseStore, action: ActionTypes) {
       return state;
   }
 }
-
-// store.subscribe(() => {
-//   localStorage.setItem(localStorage_key, JSON.stringify(store.getState().user));
-// });
 
 export default createStore(appReducer);

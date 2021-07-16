@@ -1,6 +1,7 @@
 export interface Quiz {
-  id: number;
+  id: string;
   title: string;
+  layout: "single" | "multi";
   items: string[];
 }
 
