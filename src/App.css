@@ -43,3 +43,15 @@
   padding: 0.25em 0.5em;
   font-size: 13px;
 }
+
+.quizContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.quizContainer .holder {
+  margin-top: 50px;
+  width: 800px;
+}

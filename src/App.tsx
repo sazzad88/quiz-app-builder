@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from "./Pages/Home";
 import Dashboard from "./Pages/Dashboard";
 import QuizEdit from "./Pages/QuizEdit";
+import Quiz from "./Pages/Quiz";
 import config from "./app_config.json";
 import store from "./store/store";
 
@@ -40,6 +41,10 @@ function App() {
 
               <Route exact path="/dashboard/quiz/:quizId/edit">
                 <QuizEdit />
+              </Route>
+
+              <Route exact path="/quiz/:quizId">
+                <Quiz />
               </Route>
             </Switch>
           </Router>
