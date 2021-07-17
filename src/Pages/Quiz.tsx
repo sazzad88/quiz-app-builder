@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import OnePageQuiz from "../components/Quiz/OnePageQuiz";
+import MultiStepQuiz from "../components/Quiz/MultiStepQuiz";
 
 import { Option, Question, Quiz, Store } from "../store/types";
 function QuizHome() {
@@ -54,7 +55,11 @@ function QuizHome() {
                     </>
                   ) : (
                     <>
-                      <OnePageQuiz quiz={quiz} />
+                      {quiz.layout === "single" ? (
+                        <OnePageQuiz quiz={quiz} />
+                      ) : (
+                        <MultiStepQuiz quiz={quiz} />
+                      )}
                     </>
                   )}
                 </>

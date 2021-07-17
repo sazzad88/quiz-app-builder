@@ -25,6 +25,23 @@ export const addQuiz =
     dispatch(setQuiz(quizList));
   };
 
+export const updateQuiz =
+  (
+    quizId: string,
+    title: string,
+    layout: "single" | "multi"
+  ): ThunkAction<void, Store, unknown, Action<string>> =>
+  (dispatch, getState) => {
+    let quizList: Quiz[] = [...getState().quizList];
+
+    let quizIndex = quizList.findIndex((item: Quiz) => item.id === quizId);
+
+    quizList[quizIndex].title = title;
+    quizList[quizIndex].layout = layout;
+
+    dispatch(setQuiz(quizList));
+  };
+
 export const UpdateQuestion =
   (
     quizId: string,

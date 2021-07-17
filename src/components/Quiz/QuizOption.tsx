@@ -5,14 +5,28 @@ import { useParams } from "react-router-dom";
 
 import { Option, Question, Quiz, Store } from "../../store/types";
 function QuizOption({
+  givenAnswerMap,
   question,
   updateAnswer,
 }: {
+  givenAnswerMap?: Record<string, string[]>;
   question: Question;
   updateAnswer: (questionId: string, answer: string[]) => void;
 }) {
-  const [radioValue, setRadioValue] = useState<string>("");
-  const [checkBoxValues, setCheckboxValues] = useState<string[]>([]);
+  const [radioValue, setRadioValue] = useState<string>(
+    givenAnswerMap
+      ? givenAnswerMap[question.id]
+        ? givenAnswerMap[question.id][0]
+        : ""
+      : ""
+  );
+  const [checkBoxValues, setCheckboxValues] = useState<string[]>(
+    givenAnswerMap
+      ? givenAnswerMap[question.id]
+        ? givenAnswerMap[question.id]
+        : []
+      : []
+  );
   return (
     <div className="columns">
       <div className="column is-full">

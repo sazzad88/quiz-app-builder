@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Store, Quiz, Question } from "../../store/types";
+import { updateQuiz } from "../../store/actions";
 import { useParams } from "react-router-dom";
 import CreateQuestion from "./CreateQuestion";
 import ManageQuestion from "./ManageQuestion";
 
 function Edit() {
+  const dispatch = useDispatch();
   const params = useParams();
   const { quizId } = params as {
     quizId: string;
@@ -36,6 +38,14 @@ function Edit() {
     setQuestionId("");
   };
 
+  const handleUpdateQuiz = () => {
+    if (title.trim().length < 1) {
+      return;
+    }
+
+    dispatch(updateQuiz(quizId, title, layout as "single" | "multi"));
+  };
+
   return (
     <div className="card">
       <div className="card-content">
@@ -47,7 +57,12 @@ function Edit() {
                 style={{ justifyContent: "flex-end" }}
               >
                 <div className="control">
-                  <button className="button is-link is-small">Save</button>
+                  <button
+                    className="button is-link is-small"
+                    onClick={handleUpdateQuiz}
+                  >
+                    Save
+                  </button>
                 </div>
               </div>
               <div className="field is-small">
