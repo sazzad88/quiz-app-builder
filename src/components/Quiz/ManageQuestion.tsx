@@ -32,7 +32,7 @@ const ManageQuestion = ({
   const [openOption, setOpenOption] = useState<boolean>(false);
   const [options, setOptions] = useState<Option[]>([]);
 
-  useEffect(() => {
+  const setEverything = () => {
     const quiz = quizList.find((item: Quiz) => item.id === quizId);
 
     if (quiz) {
@@ -40,15 +40,24 @@ const ManageQuestion = ({
         (item: Question) => item.id === questionId
       );
 
+      console.log("set eveerything again ", question?.correctAnswers);
+
       if (question) {
         setText(question.text);
         setImageUrl(question.imageUrl!);
         setPoints(String(question.points));
         setOptionType(question.optionType);
-        setOptions(question.options);
         setCorrectAnswers(question.correctAnswers);
+
+        setTimeout(() => {
+          setOptions([...question.options]);
+        });
       }
     }
+  };
+
+  useEffect(() => {
+    setEverything();
   }, []);
 
   const handleQuizQuestionUpdate = () => {
@@ -76,6 +85,10 @@ const ManageQuestion = ({
     dispatch(
       UpdateQuestion(quizId, questionId, text, imageUrl, +points, optionType)
     );
+
+    setTimeout(() => {
+      setEverything();
+    }, 400);
   };
 
   const handleUpdateOption = (

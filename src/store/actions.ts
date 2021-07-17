@@ -55,6 +55,12 @@ export const UpdateQuestion =
         question.points = points;
         question.optionType = optionType;
 
+        if (optionType === "single" && question.correctAnswers.length > 1) {
+          question.correctAnswers = [
+            question.correctAnswers[question.correctAnswers.length - 1],
+          ];
+        }
+
         currentQuizList[quizIndex].items[QuestionIndex] = question;
 
         dispatch(setQuiz(currentQuizList));
@@ -127,12 +133,17 @@ export const UpdateOption =
         const question: Question = { ...quiz.items[QuestionIndex] };
 
         if (answer !== "") {
-          question.correctAnswers = Array.from(
-            new Set([...question.correctAnswers, answer])
+          if (question.optionType === "multiple")
+            question.correctAnswers = Array.from(
+              new Set([...question.correctAnswers, answer])
+            );
+          else question.correctAnswers = [answer];
+        } else {
+          console.log("unset");
+          question.correctAnswers = question.correctAnswers.filter(
+            (item) => item !== optionId
           );
         }
-
-        console.log(question.correctAnswers);
 
         const optionIndex = question.options.findIndex(
           (item: Option) => item.id === optionId
