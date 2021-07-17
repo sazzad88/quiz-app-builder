@@ -40,7 +40,7 @@ const ManageQuestion = ({
         (item: Question) => item.id === questionId
       );
 
-      console.log("set eveerything again ", question?.correctAnswers);
+      console.log("called with q ", question?.options);
 
       if (question) {
         setText(question.text);
@@ -48,17 +48,14 @@ const ManageQuestion = ({
         setPoints(String(question.points));
         setOptionType(question.optionType);
         setCorrectAnswers(question.correctAnswers);
-
-        setTimeout(() => {
-          setOptions([...question.options]);
-        });
+        setOptions([...question.options]);
       }
     }
   };
 
   useEffect(() => {
     setEverything();
-  }, []);
+  }, [openOption]);
 
   const handleQuizQuestionUpdate = () => {
     if (text.trim().length < 1) {
@@ -86,9 +83,9 @@ const ManageQuestion = ({
       UpdateQuestion(quizId, questionId, text, imageUrl, +points, optionType)
     );
 
-    setTimeout(() => {
-      setEverything();
-    }, 400);
+    // setTimeout(() => {
+    //   setEverything();
+    // }, 400);
   };
 
   const handleUpdateOption = (
@@ -101,6 +98,8 @@ const ManageQuestion = ({
       UpdateOption(optionId, quizId, questionId, text, imageUrl, answer)
     );
   };
+
+  console.log(options);
 
   return (
     <div className="modal is-active">
