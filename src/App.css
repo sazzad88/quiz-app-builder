@@ -31,9 +31,15 @@
 }
 
 .mt-20 {
-  margin-top: 20;
+  margin-top: 20px;
 }
 
 .big-modal {
-  width: 900px;
+  width: 950px;
+}
+
+.table.is-small td,
+.table.is-small th {
+  padding: 0.25em 0.5em;
+  font-size: 13px;
 }

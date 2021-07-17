@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { addQuiz } from "../../store/actions";
+import { UpdateOption } from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { UpdateQuestion } from "../../store/actions";
 import { useHistory } from "react-router-dom";
 import { uuid } from "../../utils";
 import { Option, Question, Quiz, Store } from "../../store/types";
+import QuestionOption from "./QuestionOption";
 import CreateOption from "./CreateOption";
 
 const ManageQuestion = ({
@@ -22,12 +23,14 @@ const ManageQuestion = ({
   const [text, setText] = useState<string>("");
   const [imageUrl, setImageUrl] = useState<string>("");
   const [points, setPoints] = useState<string>("1");
+  const [correctAnswers, setCorrectAnswers] = useState<string[]>([]);
   const [optionType, setOptionType] = useState<"single" | "multiple">("single");
   const [error, setError] = useState<{
     text: boolean;
     points: boolean;
   }>({ text: false, points: false });
   const [openOption, setOpenOption] = useState<boolean>(false);
+  const [options, setOptions] = useState<Option[]>([]);
 
   useEffect(() => {
     const quiz = quizList.find((item: Quiz) => item.id === quizId);
@@ -42,6 +45,8 @@ const ManageQuestion = ({
         setImageUrl(question.imageUrl!);
         setPoints(String(question.points));
         setOptionType(question.optionType);
+        setOptions(question.options);
+        setCorrectAnswers(question.correctAnswers);
       }
     }
   }, []);
@@ -70,6 +75,17 @@ const ManageQuestion = ({
 
     dispatch(
       UpdateQuestion(quizId, questionId, text, imageUrl, +points, optionType)
+    );
+  };
+
+  const handleUpdateOption = (
+    optionId: string,
+    text: string,
+    imageUrl: string,
+    answer: string
+  ) => {
+    dispatch(
+      UpdateOption(optionId, quizId, questionId, text, imageUrl, answer)
     );
   };
 
@@ -124,7 +140,7 @@ const ManageQuestion = ({
           </div>
           <div className="field-body">
             <div className="field">
-              <label className="label is-small">Quesiton points</label>
+              <label className="label is-small">Question points</label>
               <div className="control">
                 <input
                   className={`input is-small ${error.text ? "is-danger" : ""}`}
@@ -147,7 +163,7 @@ const ManageQuestion = ({
             <div className="field">
               <label className="label is-small">Selection Type</label>
               <div className="control">
-                <div className="select is-small">
+                <div className="select is-small is-fullwidth">
                   <select
                     value={optionType}
                     onChange={(e) => {
@@ -162,6 +178,36 @@ const ManageQuestion = ({
             </div>
           </div>
 
+          {options.length === 0 ? null : (
+            <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth mt-20 is-small">
+              <thead>
+                <tr>
+                  <th>
+                    <abbr title="Text">Text</abbr>
+                  </th>
+                  <th>
+                    <abbr title="imageUrl">imageUrl</abbr>
+                  </th>
+                  <th className="has-text-centered">
+                    <abbr title="Answer">Answer</abbr>
+                  </th>
+
+                  <th className="has-text-centered"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {options.map((option: Option) => (
+                  <QuestionOption
+                    correctAnswers={correctAnswers}
+                    key={option.id}
+                    option={option}
+                    updateOption={handleUpdateOption}
+                  />
+                ))}
+              </tbody>
+            </table>
+          )}
+
           {openOption ? (
             <CreateOption
               questionId={questionId}
@@ -170,7 +216,7 @@ const ManageQuestion = ({
             />
           ) : (
             <div
-              className="field is-grouped"
+              className="field is-grouped mt-20"
               style={{ justifyContent: "flex-end" }}
             >
               <div className="control">

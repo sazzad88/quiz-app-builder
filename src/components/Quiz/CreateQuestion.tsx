@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { addQuestion } from "../../store/actions";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { uuid } from "../../utils";
 
 const CreateQuiz = ({
   quizId,
