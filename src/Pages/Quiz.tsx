@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import OnePageQuiz from "../components/Quiz/OnePageQuiz";
 
 import { Option, Question, Quiz, Store } from "../store/types";
-function Home() {
+function QuizHome() {
   const params = useParams();
   const { quizId } = params as {
     quizId: string;
@@ -52,7 +53,9 @@ function Home() {
                       </p>
                     </>
                   ) : (
-                    <p>Start the quizz</p>
+                    <>
+                      <OnePageQuiz quiz={quiz} />
+                    </>
                   )}
                 </>
               ) : (
@@ -66,4 +69,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default QuizHome;

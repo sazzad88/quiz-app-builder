@@ -4,6 +4,12 @@ export interface Option {
   imageUrl?: string;
 }
 
+export interface ResultType {
+  totalQuestion: number;
+  correctAnswers: number;
+  gainPoints: number;
+}
+
 export interface Question {
   id: string;
   text: string;
