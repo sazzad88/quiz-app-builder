@@ -7,6 +7,8 @@ import { uuid } from "../../utils";
 import { Option, Question, Quiz, Store } from "../../store/types";
 import QuestionOption from "./QuestionOption";
 import CreateOption from "./CreateOption";
+import Loader from "react-loader-spinner";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 const ManageQuestion = ({
   questionId,
@@ -20,6 +22,7 @@ const ManageQuestion = ({
   const dispatch = useDispatch();
   let history = useHistory();
   const quizList = useSelector((state: Store) => state.quizList);
+  const [loading, setLoading] = useState<boolean>(false);
   const [text, setText] = useState<string>("");
   const [imageUrl, setImageUrl] = useState<string>("");
   const [points, setPoints] = useState<string>("1");
@@ -39,8 +42,6 @@ const ManageQuestion = ({
       const question = quiz.items.find(
         (item: Question) => item.id === questionId
       );
-
-      console.log("called with q ", question?.options);
 
       if (question) {
         setText(question.text);
@@ -67,7 +68,6 @@ const ManageQuestion = ({
       setError({ ...error, points: true });
       return;
     } else {
-      //   console.log(+points);
       if (isNaN(+points)) {
         setError({ ...error, points: true });
         return;
@@ -83,9 +83,12 @@ const ManageQuestion = ({
       UpdateQuestion(quizId, questionId, text, imageUrl, +points, optionType)
     );
 
+    setLoading(true);
+
     setTimeout(() => {
       setEverything();
-    }, 400);
+      setLoading(false);
+    }, 200);
   };
 
   const handleUpdateOption = (
@@ -98,20 +101,22 @@ const ManageQuestion = ({
       UpdateOption(optionId, quizId, questionId, text, imageUrl, answer)
     );
 
+    setLoading(true);
+
     setTimeout(() => {
       setEverything();
-    }, 400);
+      setLoading(false);
+    }, 200);
   };
 
   const handleOptionDelete = (opitonId: string) => {
     dispatch(DeleteOption(questionId, quizId, opitonId));
 
+    setLoading(true);
     setTimeout(() => {
       setEverything();
-    }, 400);
+    }, 200);
   };
-
-  console.log(options);
 
   return (
     <div className="modal is-active">
@@ -202,36 +207,55 @@ const ManageQuestion = ({
             </div>
           </div>
 
-          {options.length === 0 ? null : (
-            <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth mt-20 is-small">
-              <thead>
-                <tr>
-                  <th>
-                    <abbr title="Text">Text</abbr>
-                  </th>
-                  <th>
-                    <abbr title="imageUrl">imageUrl</abbr>
-                  </th>
-                  <th className="has-text-centered">
-                    <abbr title="Answer">Answer</abbr>
-                  </th>
+          <div>
+            {loading ? (
+              <div
+                className="has-text-centered"
+                style={{ height: "100px", padding: "20px" }}
+              >
+                <Loader
+                  type="Bars"
+                  color="#00BFFF"
+                  height={50}
+                  width={100}
+                  timeout={400} //3 secs
+                />
+              </div>
+            ) : (
+              <>
+                {options.length === 0 ? null : (
+                  <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth mt-20 is-small">
+                    <thead>
+                      <tr>
+                        <th>
+                          <abbr title="Text">Text</abbr>
+                        </th>
+                        <th>
+                          <abbr title="imageUrl">imageUrl</abbr>
+                        </th>
+                        <th className="has-text-centered">
+                          <abbr title="Answer">Answer</abbr>
+                        </th>
 
-                  <th className="has-text-centered"></th>
-                </tr>
-              </thead>
-              <tbody>
-                {options.map((option: Option) => (
-                  <QuestionOption
-                    correctAnswers={correctAnswers}
-                    key={option.id}
-                    option={option}
-                    updateOption={handleUpdateOption}
-                    handleOptionDelete={handleOptionDelete}
-                  />
-                ))}
-              </tbody>
-            </table>
-          )}
+                        <th className="has-text-centered"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {options.map((option: Option) => (
+                        <QuestionOption
+                          correctAnswers={correctAnswers}
+                          key={option.id}
+                          option={option}
+                          updateOption={handleUpdateOption}
+                          handleOptionDelete={handleOptionDelete}
+                        />
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+              </>
+            )}
+          </div>
 
           {openOption ? (
             <CreateOption

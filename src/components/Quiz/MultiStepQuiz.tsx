@@ -23,6 +23,18 @@ function OnePageQuiz({ quiz }: { quiz: Quiz }) {
     setGivenAnswerMap({ ...givenAnswerMap, [questionId]: answer });
   };
 
+  const restart = () => {
+    setFinalResult({
+      totalQuestion: 0,
+      correctAnswers: 0,
+      gainPoints: 0,
+    });
+
+    setShow(false);
+    setGivenAnswerMap({});
+    setcurrentIndex(0);
+  };
+
   const calculateResult = () => {
     let gainPoints = 0,
       correctAnswers = 0;
@@ -67,9 +79,14 @@ function OnePageQuiz({ quiz }: { quiz: Quiz }) {
     <div>
       {/* <p>{JSON.stringify(finalResult)}</p> */}
       {show ? (
-        <QuizResult result={finalResult} />
+        <QuizResult result={finalResult} restart={restart} />
       ) : (
         <>
+          <p style={{ textAlign: "right" }}>
+            <span>
+              {currentIndex + 1} / {quiz.items.length}
+            </span>
+          </p>
           {[quiz.items[currentIndex]].map((question: Question) => (
             <QuizOption
               givenAnswerMap={givenAnswerMap}

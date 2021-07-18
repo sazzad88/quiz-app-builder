@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { Option } from "../../store/types";
 
 import { confirmAlert } from "react-confirm-alert";
@@ -21,8 +19,6 @@ const QuestionOption = ({
   ) => void;
   handleOptionDelete: (optionId: string) => void;
 }) => {
-  const dispatch = useDispatch();
-  let history = useHistory();
   const [text, setText] = useState<string>(option.text);
   const [imageUrl, setImageUrl] = useState<string>(option.imageUrl!);
   const [answer, setAnswer] = useState<string>(option.id);
@@ -40,6 +36,8 @@ const QuestionOption = ({
 
     updateOption(option.id, text.trim(), imageUrl.trim(), answer);
   };
+
+  console.log({ currentAnswers });
 
   return (
     <tr key={option.id}>

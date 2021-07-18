@@ -3,7 +3,7 @@ import React from "react";
 import "./App.css";
 
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from "./Pages/Home";
 import Dashboard from "./Pages/Dashboard";
 import QuizEdit from "./Pages/QuizEdit";
@@ -23,18 +23,18 @@ function App() {
     <Provider store={store}>
       <div className="App">
         <ReactNotification />
-        <nav className="navbar has-shadow">
-          <div className="container">
-            <div className="navbar-brand">
-              <a className="navbar-item" href="#">
-                Quiz App Builder
-              </a>
-            </div>
-          </div>
-        </nav>
 
         <section className="container cards-container">
           <Router>
+            <nav className="navbar has-shadow">
+              <div className="container">
+                <div className="navbar-brand">
+                  <Link className="navbar-item" to="/">
+                    Quiz App Builder
+                  </Link>
+                </div>
+              </div>
+            </nav>
             <Switch>
               <Route exact path="/">
                 <Home />

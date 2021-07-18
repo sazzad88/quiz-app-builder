@@ -32,6 +32,8 @@ function Home() {
               {quizList.map((quiz: Quiz) => (
                 <QuizName key={quiz.id} quiz={quiz} />
               ))}
+
+              {quizList.length === 0 ? <p>Empty list</p> : null}
             </div>
 
             {openModal ? <CreateQuiz closeModal={closeModal} /> : null}

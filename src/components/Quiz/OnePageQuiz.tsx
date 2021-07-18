@@ -49,11 +49,22 @@ function OnePageQuiz({ quiz }: { quiz: Quiz }) {
     setShow(true);
   };
 
+  const restart = () => {
+    setFinalResult({
+      totalQuestion: 0,
+      correctAnswers: 0,
+      gainPoints: 0,
+    });
+
+    setShow(false);
+    setGivenAnswerMap({});
+  };
+
   return (
     <div>
       {/* <p>{JSON.stringify(finalResult)}</p> */}
       {show ? (
-        <QuizResult result={finalResult} />
+        <QuizResult result={finalResult} restart={restart} />
       ) : (
         <>
           {quiz.items.map((question: Question) => (
