@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Store, Quiz, Question } from "../../store/types";
 import { updateQuiz, sortQuizQuestions } from "../../store/actions";
+import { store } from "react-notifications-component";
 import { useParams } from "react-router-dom";
 import CreateQuestion from "./CreateQuestion";
 import ManageQuestion from "./ManageQuestion";
@@ -27,6 +28,7 @@ function Edit() {
   const quizList = useSelector((state: Store) => state.quizList);
   const [quiz, setQuiz] = useState<Quiz>({} as Quiz);
   const [title, setTitle] = useState<string>("");
+  const [error, setError] = useState<boolean>(false);
   const [layout, setLayout] = useState<string>("");
   const [questionId, setQuestionId] = useState<string>("");
 
@@ -52,10 +54,25 @@ function Edit() {
 
   const handleUpdateQuiz = () => {
     if (title.trim().length < 1) {
+      setError(true);
       return;
     }
 
     dispatch(updateQuiz(quizId, title, layout as "single" | "multi"));
+
+    store.addNotification({
+      // title: "Notification!",
+      message: "Quiz info updated",
+      type: "success",
+      insert: "top",
+      container: "top-right",
+      animationIn: ["animate__animated", "animate__fadeIn"],
+      animationOut: ["animate__animated", "animate__fadeOut"],
+      dismiss: {
+        duration: 1000,
+        onScreen: true,
+      },
+    });
   };
 
   const onDragEnd = (result: DropResult, provided: ResponderProvided) => {
@@ -111,14 +128,18 @@ function Edit() {
                 <label className="label">Title</label>
                 <div className="control">
                   <input
-                    className="input is-small"
+                    className={`input is-small ${error ? "is-danger" : ""}`}
                     type="text"
                     value={title}
                     onChange={(e) => {
                       setTitle(e.target.value);
+                      setError(false);
                     }}
                     placeholder="Quiz title"
                   />
+                  {error ? (
+                    <p className="help is-danger">Quiz title can't be empty</p>
+                  ) : null}
                 </div>
               </div>
 
