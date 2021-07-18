@@ -42,6 +42,24 @@ export const updateQuiz =
     dispatch(setQuiz(quizList));
   };
 
+export const sortQuizQuestions =
+  (
+    quizId: string,
+    values: Question[]
+  ): ThunkAction<void, Store, unknown, Action<string>> =>
+  (dispatch, getState) => {
+    const currentQuizList: Quiz[] = [...getState().quizList];
+    let quizIndex: number = getState().quizList.findIndex(
+      (item: Quiz) => item.id === quizId
+    );
+
+    if (quizIndex !== -1) {
+      currentQuizList[quizIndex].items = values;
+
+      dispatch(setQuiz(currentQuizList));
+    }
+  };
+
 export const UpdateQuestion =
   (
     quizId: string,
