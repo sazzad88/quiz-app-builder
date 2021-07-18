@@ -27,6 +27,8 @@ function QuizOption({
         : []
       : []
   );
+
+  console.log(question);
   return (
     <div className="columns">
       <div className="column is-full">
@@ -34,6 +36,13 @@ function QuizOption({
           <header className="card-header">
             <p className="card-header-title">
               {question.text}
+              {question.imageUrl !== "" ? (
+                <img
+                  style={{ width: "50%" }}
+                  src={question.imageUrl}
+                  alt={""}
+                />
+              ) : null}
               &nbsp;&nbsp;
               <span className="tag is-warning">{question.points}</span>
             </p>
@@ -63,6 +72,9 @@ function QuizOption({
                       }}
                     />
                     &nbsp;&nbsp; {option.text}
+                    {option.imageUrl !== "" ? (
+                      <img src={option.imageUrl} alt={""} />
+                    ) : null}
                   </div>
                 ))}
               </div>
@@ -82,6 +94,9 @@ function QuizOption({
                       }}
                     />
                     &nbsp;&nbsp; {option.text}
+                    {option.imageUrl !== "" ? (
+                      <img src={option.imageUrl} alt={""} />
+                    ) : null}
                   </div>
                 ))}
               </div>
