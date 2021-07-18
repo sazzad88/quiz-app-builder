@@ -3,7 +3,7 @@ import React from "react";
 import "./App.css";
 
 import { Provider, useSelector } from "react-redux";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./Pages/Home";
 import Dashboard from "./Pages/Dashboard";
 import QuizEdit from "./Pages/QuizEdit";

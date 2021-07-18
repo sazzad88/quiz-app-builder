@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Edit from "../components/Quiz/Edit";
+import { Link } from "react-router-dom";
 
 function QuizEdit() {
   //   const [openModal, setOpenModal] = useState<Boolean>(false);
@@ -14,14 +15,9 @@ function QuizEdit() {
         <div className="card">
           <header className="card-header">
             <p className="card-header-title">Edit Quiz</p>
-            <button
-              className="button is-small is-info"
-              onClick={() => {
-                // setOpenModal(true);
-              }}
-            >
+            <Link className="button is-small is-info" to="/dashboard">
               Back to quiz list
-            </button>
+            </Link>
           </header>
           <div className="card-content">
             <div className="content">
