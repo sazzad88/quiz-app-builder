@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { Quiz, Question, ResultType } from "../../store/types";
-import QuizOption from "./QuizOption";
+import QuizOption from "../Dashboard/QuizOption";
 import QuizResult from "./QuizResult";
 function OnePageQuiz({ quiz }: { quiz: Quiz }) {
   const [show, setShow] = useState<boolean>(false);

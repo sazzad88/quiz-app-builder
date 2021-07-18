@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-
-import { Option, Question, Quiz, Store } from "../../store/types";
+import { Option, Question } from "../../store/types";
 function QuizOption({
   givenAnswerMap,
   question,
@@ -28,7 +25,6 @@ function QuizOption({
       : []
   );
 
-  console.log(question);
   return (
     <div className="columns">
       <div className="column is-full">

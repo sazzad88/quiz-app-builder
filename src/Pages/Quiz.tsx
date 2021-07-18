@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import OnePageQuiz from "../components/Quiz/OnePageQuiz";
 import MultiStepQuiz from "../components/Quiz/MultiStepQuiz";
 
-import { Option, Question, Quiz, Store } from "../store/types";
+import { Quiz, Store } from "../store/types";
 function QuizHome() {
   const params = useParams();
   const { quizId } = params as {
@@ -13,7 +13,6 @@ function QuizHome() {
   };
   const quizList = useSelector((state: Store) => state.quizList);
 
-  const [valid, setValid] = useState<boolean>(false);
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const [quizStarted, setQuizStarted] = useState<boolean>(false);
 
@@ -22,7 +21,6 @@ function QuizHome() {
 
     if (found) {
       setQuiz(found);
-      setValid(true);
     }
   }, []);
 
@@ -64,7 +62,7 @@ function QuizHome() {
                   )}
                 </>
               ) : (
-                <p></p>
+                <p>NO quiz found</p>
               )}
             </div>
           </div>

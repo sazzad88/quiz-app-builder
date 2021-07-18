@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import CreateQuiz from "../components/Quiz/Create";
-import QuizName from "../components/Quiz/QuizName";
-import { useDispatch, useSelector } from "react-redux";
+import CreateQuiz from "../components/Dashboard/Create";
+import QuizName from "../components/Dashboard/QuizName";
+import { useSelector } from "react-redux";
 import { Quiz, Store } from "../store/types";
 
 function Home() {

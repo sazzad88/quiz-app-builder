@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { UpdateOption, DeleteOption } from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { UpdateQuestion } from "../../store/actions";
-import { useHistory } from "react-router-dom";
-import { uuid } from "../../utils";
 import { Option, Question, Quiz, Store } from "../../store/types";
 import QuestionOption from "./QuestionOption";
 import CreateOption from "./CreateOption";

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { addQuestion } from "../../store/actions";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 
 const CreateQuiz = ({
   quizId,
@@ -11,7 +10,7 @@ const CreateQuiz = ({
   closeQuestion: (created: boolean) => void;
 }) => {
   const dispatch = useDispatch();
-  let history = useHistory();
+
   const [text, setText] = useState<string>("");
   const [imageUrl, setImageUrl] = useState<string>("");
   const [points, setPoints] = useState<string>("1");

@@ -1,14 +1,8 @@
-import React, { useState } from "react";
-import Edit from "../components/Quiz/Edit";
+import React from "react";
+import Edit from "../components/Dashboard/Edit";
 import { Link } from "react-router-dom";
 
 function QuizEdit() {
-  //   const [openModal, setOpenModal] = useState<Boolean>(false);
-
-  //   const closeModal = () => {
-  //     setOpenModal(false);
-  //   };
-
   return (
     <div className="columns">
       <div className="column is-12">
