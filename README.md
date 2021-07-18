@@ -1,46 +1,41 @@
-# Getting Started with Create React App
+## Quiz App Builder
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+There will be two views of the application. Dashboard view for quiz creator and a visitor view.
 
-## Available Scripts
+## Requirements
 
-In the project directory, you can run:
+**Dashboard:**
 
-### `npm start`
+1.  The homepage shows a list of all quizzes .
+2.  User create a new quiz providing a quiz title and its questions and answers (A quiz can have multiple questions and answers).  
+    For example:
+    1.  Title: Quiz 1
+        \=> Question 1  
+         Answer 1  
+         Answer 2  
+         Answer 3
+        \=> Question 2  
+         Answer 1  
+         Answer 2  
+         Answer 3
+        \=> Question 3  
+         Answer 1  
+         Answer 2  
+         Answer 3
+        So on...
+3.  User can add text and optionally an image to the quiz questions. No file upload, just adding images by URL.
+4.  Based on the question type, user can add his/her options/choices for the answer.
+    1.  single selection, multiple selections
+    2.  checkbox with the option input to mark it/them as a correct answer(s).
+    3.  Each option contains a text and optionally an image
+    4.  An input field to add points for correct answers.
+    5.  User is allowed to add as many options as he can.
+5.  Has option to set quiz layout eg: one question per page or all questions on the same page.
+6.  The questions are sortable by dragging up and down
+7.  User can edit the questions/answers/points/quiz title
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**Quiz View**
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+1.  Visiting a view URL (\`/quiz/{quizId}\`)
+2.  The layout can be either all questions on a single page or one question per page based on the config you stored while making the quiz.
+3.  User can see his score at the end of answering all questions.
