@@ -124,6 +124,30 @@ export const UpdateQuestion =
     }
   };
 
+export const DeleteQuestion =
+  (
+    quizId: string,
+    questionId: string
+  ): ThunkAction<void, Store, unknown, Action<string>> =>
+  (dispatch, getState) => {
+    const currentQuizList: Quiz[] = [...getState().quizList];
+    let quizIndex: number = getState().quizList.findIndex(
+      (item: Quiz) => item.id === quizId
+    );
+
+    if (quizIndex !== -1) {
+      currentQuizList[quizIndex].items = currentQuizList[
+        quizIndex
+      ].items.filter((item: Question) => item.id !== questionId);
+
+      currentQuizList[quizIndex].valid = isValidQuiz(
+        currentQuizList[quizIndex]
+      );
+
+      dispatch(setQuiz(currentQuizList));
+    }
+  };
+
 export const AddOption =
   (
     quizId: string,
@@ -155,6 +179,47 @@ export const AddOption =
         });
 
         question.options = options;
+
+        currentQuizList[quizIndex].items[QuestionIndex] = question;
+
+        currentQuizList[quizIndex].valid = isValidQuiz(
+          currentQuizList[quizIndex]
+        );
+
+        dispatch(setQuiz(currentQuizList));
+      }
+    }
+  };
+
+export const DeleteOption =
+  (
+    questionId: string,
+    quizId: string,
+    optionId: string
+  ): ThunkAction<void, Store, unknown, Action<string>> =>
+  (dispatch, getState) => {
+    const currentQuizList: Quiz[] = [...getState().quizList];
+    let quizIndex: number = getState().quizList.findIndex(
+      (item: Quiz) => item.id === quizId
+    );
+
+    if (quizIndex !== -1) {
+      const quiz: Quiz = currentQuizList[quizIndex];
+
+      const QuestionIndex = quiz.items.findIndex(
+        (item: Question) => item.id === questionId
+      );
+
+      if (QuestionIndex !== -1) {
+        const question: Question = { ...quiz.items[QuestionIndex] };
+
+        question.options = question.options.filter(
+          (item: Option) => item.id !== optionId
+        );
+
+        question.correctAnswers = question.correctAnswers.filter(
+          (item) => item !== optionId
+        );
 
         currentQuizList[quizIndex].items[QuestionIndex] = question;
 

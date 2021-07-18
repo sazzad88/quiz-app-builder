@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { UpdateOption } from "../../store/actions";
+import { UpdateOption, DeleteOption } from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { UpdateQuestion } from "../../store/actions";
 import { useHistory } from "react-router-dom";
@@ -83,9 +83,9 @@ const ManageQuestion = ({
       UpdateQuestion(quizId, questionId, text, imageUrl, +points, optionType)
     );
 
-    // setTimeout(() => {
-    //   setEverything();
-    // }, 400);
+    setTimeout(() => {
+      setEverything();
+    }, 400);
   };
 
   const handleUpdateOption = (
@@ -97,6 +97,18 @@ const ManageQuestion = ({
     dispatch(
       UpdateOption(optionId, quizId, questionId, text, imageUrl, answer)
     );
+
+    setTimeout(() => {
+      setEverything();
+    }, 400);
+  };
+
+  const handleOptionDelete = (opitonId: string) => {
+    dispatch(DeleteOption(questionId, quizId, opitonId));
+
+    setTimeout(() => {
+      setEverything();
+    }, 400);
   };
 
   console.log(options);
@@ -214,6 +226,7 @@ const ManageQuestion = ({
                     key={option.id}
                     option={option}
                     updateOption={handleUpdateOption}
+                    handleOptionDelete={handleOptionDelete}
                   />
                 ))}
               </tbody>

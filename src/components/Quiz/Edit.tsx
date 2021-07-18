@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Store, Quiz, Question } from "../../store/types";
-import { updateQuiz, sortQuizQuestions } from "../../store/actions";
+import {
+  updateQuiz,
+  sortQuizQuestions,
+  DeleteQuestion,
+} from "../../store/actions";
 import { store } from "react-notifications-component";
 import { useParams } from "react-router-dom";
 import CreateQuestion from "./CreateQuestion";
 import ManageQuestion from "./ManageQuestion";
 import { DropResult, ResponderProvided } from "react-beautiful-dnd";
-
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+
+import { confirmAlert } from "react-confirm-alert";
 
 // a little function to help us with reordering the result
 const reorder = (list: Question[], startIndex: number, endIndex: number) => {
@@ -247,6 +252,36 @@ function Edit() {
                                         }
                                       >
                                         Manage
+                                      </button>
+
+                                      <button
+                                        style={{ marginLeft: "10px" }}
+                                        className="button is-small is-danger"
+                                        onClick={() => {
+                                          confirmAlert({
+                                            title: "Confirm to delete",
+                                            message:
+                                              "Are you sure to delete this question",
+                                            buttons: [
+                                              {
+                                                label: "Yes",
+                                                onClick: () =>
+                                                  dispatch(
+                                                    DeleteQuestion(
+                                                      quizId,
+                                                      quesiton.id
+                                                    )
+                                                  ),
+                                              },
+                                              {
+                                                label: "No",
+                                                onClick: () => {},
+                                              },
+                                            ],
+                                          });
+                                        }}
+                                      >
+                                        Delete
                                       </button>
                                     </div>
                                   </div>

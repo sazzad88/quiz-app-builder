@@ -12,6 +12,7 @@ import config from "./app_config.json";
 import store from "./store/store";
 import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 store.subscribe(() => {
   localStorage.setItem(config.storage_key, JSON.stringify(store.getState()));

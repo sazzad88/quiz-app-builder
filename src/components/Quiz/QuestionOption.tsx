@@ -3,10 +3,13 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Option } from "../../store/types";
 
+import { confirmAlert } from "react-confirm-alert";
+
 const QuestionOption = ({
   option,
   correctAnswers,
   updateOption,
+  handleOptionDelete,
 }: {
   option: Option;
   correctAnswers: string[];
@@ -16,6 +19,7 @@ const QuestionOption = ({
     imageUrl: string,
     isSelected: string
   ) => void;
+  handleOptionDelete: (optionId: string) => void;
 }) => {
   const dispatch = useDispatch();
   let history = useHistory();
@@ -86,7 +90,22 @@ const QuestionOption = ({
         </button>
         <button
           className="button is-small is-danger"
-          onClick={() => console.log("")}
+          onClick={() => {
+            confirmAlert({
+              title: "Confirm to delete",
+              message: "Are you sure to delete this option",
+              buttons: [
+                {
+                  label: "Yes",
+                  onClick: () => handleOptionDelete(option.id),
+                },
+                {
+                  label: "No",
+                  onClick: () => {},
+                },
+              ],
+            });
+          }}
         >
           Remove
         </button>

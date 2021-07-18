@@ -8,7 +8,7 @@ function QuizPage({ quiz }: { quiz: Quiz }) {
   return (
     <div className="card mt-20">
       <header className="card-header">
-        <p className="card-header-title">
+        <div className="card-header-title">
           {quiz.title}
           &nbsp;&nbsp;
           <span
@@ -22,7 +22,7 @@ function QuizPage({ quiz }: { quiz: Quiz }) {
             Each quesiton in a quiz should have at least 2 options and 1 or more
             marked answers.
           </ReactTooltip>
-        </p>
+        </div>
         <Link
           to={`/dashboard/quiz/${quiz.id}/edit`}
           className="button is-small is-link"
