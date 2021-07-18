@@ -19,7 +19,7 @@ function QuizPage({ quiz }: { quiz: Quiz }) {
             {quiz.valid ? "Valid" : "Not valid ?"}
           </span>
           <ReactTooltip id={quiz.id} place="top" effect="solid">
-            Each quesiton in a quiz should have at least 2 options and 1 or more
+            Each question in a quiz should have at least 2 options and 1 or more
             marked answers.
           </ReactTooltip>
         </div>

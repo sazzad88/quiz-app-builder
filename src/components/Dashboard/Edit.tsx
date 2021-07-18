@@ -128,7 +128,7 @@ function Edit() {
                   {quiz?.valid ? "Valid Quiz" : "Not valid ?"}
                 </span>
                 <ReactTooltip id={questionId} place="top" effect="solid">
-                  Each quesiton in a quiz should have at least 2 options and 1
+                  Each question in a quiz should have at least 2 options and 1
                   or more marked answers.
                 </ReactTooltip>
               </div>
@@ -178,7 +178,7 @@ function Edit() {
                         All question visible at a time
                       </option>
                       <option value="multi">
-                        One quesiton visible at a time
+                        One question visible at a time
                       </option>
                     </select>
                   </div>
@@ -194,7 +194,7 @@ function Edit() {
             <>
               {quiz.items.length === 0 ? (
                 <div className="notification">
-                  Please add some quesitons to your quiz and make it interesting
+                  Please add some questions to your quiz and make it interesting
                 </div>
               ) : (
                 <>
@@ -223,10 +223,10 @@ function Edit() {
                           style={getListStyle(snapshot.isDraggingOver)}
                         >
                           {quiz.items.map(
-                            (quesiton: Question, index: number) => (
+                            (question: Question, index: number) => (
                               <Draggable
-                                key={quesiton.id}
-                                draggableId={quesiton.id}
+                                key={question.id}
+                                draggableId={question.id}
                                 index={index}
                               >
                                 {(provided, snapshot) => (
@@ -241,10 +241,10 @@ function Edit() {
                                     )}
                                   >
                                     <div className="column is-4">
-                                      {quesiton.text}
+                                      {question.text}
                                     </div>
                                     <div className="column is-2 has-text-centered">
-                                      {quesiton.optionType === "multiple" ? (
+                                      {question.optionType === "multiple" ? (
                                         <span className="tag is-black">
                                           Multiple
                                         </span>
@@ -255,16 +255,16 @@ function Edit() {
                                       )}
                                     </div>
                                     <div className="column is-2 has-text-centered">
-                                      {quesiton.options.length}
+                                      {question.options.length}
                                     </div>
                                     <div className="column is-2 has-text-centered">
-                                      {quesiton.points}
+                                      {question.points}
                                     </div>
                                     <div className="column is-2 has-text-centered">
                                       <button
                                         className="button is-small is-success"
                                         onClick={() =>
-                                          setQuestionId(quesiton.id)
+                                          setQuestionId(question.id)
                                         }
                                       >
                                         Manage
@@ -285,7 +285,7 @@ function Edit() {
                                                   dispatch(
                                                     DeleteQuestion(
                                                       quizId,
-                                                      quesiton.id
+                                                      question.id
                                                     )
                                                   ),
                                               },

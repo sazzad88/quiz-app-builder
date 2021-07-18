@@ -55,7 +55,7 @@ const CreateQuiz = ({
       <div className="card-content">
         <div className="content">
           <div className="field">
-            <label className="label">Quesiton text</label>
+            <label className="label">Question text</label>
             <div className="control">
               <input
                 className={`input is-small ${error.text ? "is-danger" : ""}`}
@@ -87,7 +87,7 @@ const CreateQuiz = ({
             </div>
           </div>
           <div className="field">
-            <label className="label">Quesiton points</label>
+            <label className="label">Question points</label>
             <div className="control">
               <input
                 className={`input is-small ${error.text ? "is-danger" : ""}`}
