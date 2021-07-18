@@ -25,6 +25,7 @@ export interface Quiz {
   title: string;
   layout: "single" | "multi";
   items: Question[];
+  valid: boolean;
 }
 
 export interface Store {

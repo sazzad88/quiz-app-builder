@@ -7,6 +7,22 @@ export const SET_QUIZ = "SET_USER";
 
 export type ActionTypes = { type: typeof SET_QUIZ; payload: Quiz[] };
 
+const isValidQuiz = (quiz: Quiz) => {
+  let valid = true;
+
+  quiz.items.forEach((item: Question) => {
+    if (item.correctAnswers.length === 0) {
+      valid = false;
+    }
+  });
+
+  quiz.items.forEach((question: Question) => {
+    if (question.options.length < 2) valid = false;
+  });
+
+  return valid;
+};
+
 export const addQuiz =
   (
     title: string,
@@ -18,6 +34,7 @@ export const addQuiz =
       title: title,
       layout: "single",
       items: [],
+      valid: false,
     };
 
     let quizList: Quiz[] = [...getState().quizList, quiz];
@@ -98,6 +115,10 @@ export const UpdateQuestion =
 
         currentQuizList[quizIndex].items[QuestionIndex] = question;
 
+        currentQuizList[quizIndex].valid = isValidQuiz(
+          currentQuizList[quizIndex]
+        );
+
         dispatch(setQuiz(currentQuizList));
       }
     }
@@ -137,6 +158,10 @@ export const AddOption =
 
         currentQuizList[quizIndex].items[QuestionIndex] = question;
 
+        currentQuizList[quizIndex].valid = isValidQuiz(
+          currentQuizList[quizIndex]
+        );
+
         dispatch(setQuiz(currentQuizList));
       }
     }
@@ -174,7 +199,6 @@ export const UpdateOption =
             );
           else question.correctAnswers = [answer];
         } else {
-          console.log("unset");
           question.correctAnswers = question.correctAnswers.filter(
             (item) => item !== optionId
           );
@@ -188,6 +212,10 @@ export const UpdateOption =
         question.options[optionIndex].imageUrl = imageUrl;
 
         currentQuizList[quizIndex].items[QuestionIndex] = question;
+
+        currentQuizList[quizIndex].valid = isValidQuiz(
+          currentQuizList[quizIndex]
+        );
 
         dispatch(setQuiz(currentQuizList));
       }
@@ -219,6 +247,8 @@ export const addQuestion =
         correctAnswers: [],
         options: [],
       });
+
+      currentQuizList[quizIndex].valid = false;
 
       currentQuizList[quizIndex] = quiz;
 
