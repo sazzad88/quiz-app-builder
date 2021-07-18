@@ -12,8 +12,8 @@ import CreateQuestion from "./CreateQuestion";
 import ManageQuestion from "./ManageQuestion";
 import { DropResult, ResponderProvided } from "react-beautiful-dnd";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-
 import { confirmAlert } from "react-confirm-alert";
+import ReactTooltip from "react-tooltip";
 
 // a little function to help us with reordering the result
 const reorder = (list: Question[], startIndex: number, endIndex: number) => {
@@ -116,6 +116,22 @@ function Edit() {
         <div className="content">
           {quiz.id ? (
             <>
+              <div
+                className="field is-grouped"
+                style={{ justifyContent: "flex-end" }}
+              >
+                <span
+                  data-tip
+                  data-for={questionId}
+                  className={`tag is-${quiz?.valid ? "success" : "danger"}`}
+                >
+                  {quiz?.valid ? "Valid Quiz" : "Not valid ?"}
+                </span>
+                <ReactTooltip id={questionId} place="top" effect="solid">
+                  Each quesiton in a quiz should have at least 2 options and 1
+                  or more marked answers.
+                </ReactTooltip>
+              </div>
               <div
                 className="field is-grouped"
                 style={{ justifyContent: "flex-end" }}

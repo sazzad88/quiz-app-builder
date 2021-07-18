@@ -20,9 +20,10 @@ const ManageQuestion = ({
   closeModal: () => void;
 }) => {
   const dispatch = useDispatch();
-  let history = useHistory();
+
   const quizList = useSelector((state: Store) => state.quizList);
   const [loading, setLoading] = useState<boolean>(false);
+
   const [text, setText] = useState<string>("");
   const [imageUrl, setImageUrl] = useState<string>("");
   const [points, setPoints] = useState<string>("1");
@@ -131,6 +132,19 @@ const ManageQuestion = ({
           ></button>
         </header>
         <section className="modal-card-body">
+          <div
+            className="field is-grouped"
+            style={{ justifyContent: "flex-end" }}
+          >
+            <div className="control">
+              <button
+                className="button is-link is-small"
+                onClick={handleQuizQuestionUpdate}
+              >
+                Save General Info
+              </button>
+            </div>
+          </div>
           <div className="field-body">
             <div className="field">
               <label className="label is-small">Question</label>
@@ -162,7 +176,7 @@ const ManageQuestion = ({
                     setImageUrl(e.target.value);
                   }}
                   type="text"
-                  placeholder="question text"
+                  placeholder="https://image.com"
                 />
               </div>
             </div>
@@ -172,7 +186,9 @@ const ManageQuestion = ({
               <label className="label is-small">Question points</label>
               <div className="control">
                 <input
-                  className={`input is-small ${error.text ? "is-danger" : ""}`}
+                  className={`input is-small ${
+                    error.points ? "is-danger" : ""
+                  }`}
                   value={points}
                   onChange={(e) => {
                     setPoints(e.target.value);
@@ -280,12 +296,6 @@ const ManageQuestion = ({
           )}
         </section>
         <footer className="modal-card-foot">
-          <button
-            className="button is-success"
-            onClick={handleQuizQuestionUpdate}
-          >
-            Save General info
-          </button>
           <button className="button" onClick={closeModal}>
             Cancel
           </button>

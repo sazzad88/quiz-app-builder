@@ -43,13 +43,16 @@ const QuestionOption = ({
     <tr key={option.id}>
       <td>
         <input
-          className="input is-small"
+          className={`input is-small ${error.text ? "is-danger" : ""}`}
           value={text}
           onChange={(e) => {
             setText(e.target.value);
             setError({ text: false });
           }}
         />
+        {error.text ? (
+          <p className="help is-danger">Text can't be empty</p>
+        ) : null}
       </td>
       <td>
         <input
